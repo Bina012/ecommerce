@@ -1,7 +1,7 @@
 <div class="form-group">
     {!! Form::label('category_id', 'Category'); !!}
     {!! Form::select('category_id',$data['categories'], null,['class' => 'form-control','placeholder' => 'Select']); !!}
-    @include('backend.common.validation_field',['field' => 'name'])
+    @include('backend.common.validation_field',['field' => 'category_id'])
 </div>
 <div class="form-group">
     {!! Form::label('name', 'Name'); !!}

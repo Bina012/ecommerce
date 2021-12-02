@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="{{route('backend.unit.create')}}" class="btn btn-info">Create {{$panel}}</a>
+                    <a href="{{route('backend.attribute.create')}}" class="btn btn-info">Create {{$panel}}</a>
                     <div class="card card-primary card-outline">
                         <div class="card-body">
                             <h5 class="card-title">List {{$panel}}</h5>

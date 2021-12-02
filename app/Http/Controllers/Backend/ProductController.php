@@ -8,11 +8,14 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductAttribute;
+use App\Models\ProductImage;
 use App\Models\Subcategory;
 use App\Models\Tag;
 use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends BackendBaseController
 {
@@ -45,7 +48,7 @@ class ProductController extends BackendBaseController
     public function create()
     {
         $data['categories'] = Category::pluck('name','id');
-
+        $data['subcategories'] = Subcategory::pluck('name','id');
         $data['tags'] = Tag::pluck('name','id');
         $data['attributes'] = Attribute::pluck('name','id');
         $data['units'] = Unit::pluck('name','id');
@@ -62,11 +65,69 @@ class ProductController extends BackendBaseController
      */
     public function store(ProductRequest $request)
     {
+//        dd($request->all());
         $request->request->add(['created_by' => Auth::user()->id]);
         $request->request->add(['stock' => $request->quantity]);
 
         $record = $this->model->create($request->all());
         if ($record){
+            if (count($request->tag_id) > 0){
+                //add data into product tags
+                $record->tags()->attach($request->tag_id);
+            }
+
+            //attribute
+
+            $attribute_id = $request->attribute_id;
+            $attributes = $request->attribute_value;
+
+            for ($i=0;$i < count($attribute_id);$i++){
+                if (!empty($attribute_id[$i]) && !empty($attributes[$i])){
+                    //process to save data
+                    ProductAttribute::create([
+                        'product_id' => $record->id,
+                        'attribute_id' => $attribute_id[$i],
+                        'attribute_value' => $attributes[$i],
+                        'status' => 1,
+                    ]);
+                }
+            }
+            //process to store image
+            $titles = $request->input('image_title');
+
+            $images = $request->file('image_file');
+           for ($i = 0;$i < count($titles);$i++)
+           {
+               if (!empty($titles[$i]) && !empty($images[$i])){
+                   $iname = uniqid() . '_'  .$images[$i]->getClientOriginalName();
+                   $images[$i]->move('images/backend/product/',$iname);
+                    $image_dimesions = [
+                        [
+                            'width' => 200,
+                            'height' => 200
+                        ],
+                        [
+                            'width' => 500,
+                            'height' => 500
+                        ],
+                        [
+                            'width' => 1000,
+                            'height' => 1000
+                        ]
+                    ];
+                    foreach ($image_dimesions as $dimesion){
+                        $img =  Image::make('images/backend/product/'.$iname)->resize($dimesion['width'], $dimesion['height']);
+                        $img->save('images/backend/product/'.$dimesion['width'] . '_' . $dimesion['height'] . '_'. $iname);
+                    }
+
+                   ProductImage::create([
+                       'product_id' => $record->id,
+                       'image_name' => $iname,
+                       'image_title' => $titles[$i],
+                       'status' => 1,
+                   ]);
+               }
+           }
             $request->session()->flash('success',$this->panel . 'Created Successfully.');
         } else {
             $request->session()->flash('error',$this->panel . 'Creation Failed!!');
@@ -82,7 +143,7 @@ class ProductController extends BackendBaseController
      */
     public function show($id)
     {
-        $data['record'] = Category::find($id);
+        $data['record'] = Product::find($id);
         return view($this->__loadDataToView($this->folder . 'show'),compact('data'));
 
     }
@@ -95,7 +156,12 @@ class ProductController extends BackendBaseController
      */
     public function edit($id)
     {
-        $data['record'] = Category::find($id);
+        $data['categories'] = Category::pluck('name','id');
+        $data['subcategories'] = Subcategory::pluck('name','id');
+        $data['tags'] = Tag::pluck('name','id');
+        $data['attributes'] = Attribute::pluck('name','id');
+        $data['units'] = Unit::pluck('name','id');
+        $data['record'] = Product::find($id);
         if($data['record']){
             return view($this->__loadDataToView($this->folder . 'edit'),compact('data'));
 
@@ -112,9 +178,9 @@ class ProductController extends BackendBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        $data['record'] = Category::find($id);
+        $data['record'] = Product::find($id);
         $request->request->add(['updated_by'=>Auth::user()->id]);
         if ($request->hasFile('image_file')){
             $file = $request->file('image_file');
@@ -143,7 +209,7 @@ class ProductController extends BackendBaseController
      */
     public function destroy(Request $request,$id)
     {
-        $data['record'] = Category::find($id);
+        $data['record'] = Product::find($id);
 //        $img = $data['record']->image;
         if ($data['record']->delete()){
 //            if ($img){
@@ -151,10 +217,10 @@ class ProductController extends BackendBaseController
 //                    unlink(public_path().'/admin/category/'.$img);
 //                }
 //            }
-            $request->session()->flash('success','Category delete success');
+            $request->session()->flash('success','Product delete success');
             return redirect()->route($this->base_route . 'index');
         }else{
-            $request->session()->flash('error','Category deletion failed');
+            $request->session()->flash('error','Product deletion failed');
             return redirect()->route($this->base_route . 'index');
         }
 

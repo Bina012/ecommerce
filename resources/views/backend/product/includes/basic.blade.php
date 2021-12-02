@@ -5,7 +5,7 @@
 <div class="form-group">
     {!! Form::label('subcategory_id', 'SubCategory'); !!}
     {!! Form::select('subcategory_id',[], null,['class' => 'form-control','placeholder' => 'Select']); !!}
-</div
+</div>
 <div class="form-group">
     {!! Form::label('title', 'Title'); !!}
     {!! Form::text('title', null,['class' => 'form-control']); !!}

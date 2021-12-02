@@ -11,7 +11,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="{{route('backend.category.index')}}" class="btn btn-info">List {{$panel}}</a>
+                    <a href="{{route('backend.product.index')}}" class="btn btn-info">List {{$panel}}</a>
                     <div class="card card-primary card-outline">
                         <div class="card-header">
                             <h3 class="card-title">Create {{$panel}}</h3>
