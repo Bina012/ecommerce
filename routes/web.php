@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\Frontend\FrontendController::class, 'index'])->name('frontend.index');
+Route::get('/category', [\App\Http\Controllers\Frontend\FrontendController::class, 'category'])->name('frontend.category');
+Route::get('/product/{id}', [\App\Http\Controllers\Frontend\FrontendController::class, 'product'])->name('frontend.product');
+
 
 Auth::routes(['register' => false]);
 Route::middleware(['auth','permission'])->group(function() {
@@ -37,4 +38,5 @@ Route::prefix('backend')->name('backend.')->middleware(['auth','permission'])->g
     Route::resource('/permission',\App\Http\Controllers\Backend\PermissionController::class);
     Route::resource('/role',\App\Http\Controllers\Backend\RoleController::class);
     Route::resource('/user',\App\Http\Controllers\Backend\UserController::class);
+    Route::resource('/setting',\App\Http\Controllers\Backend\SettingController::class);
 });

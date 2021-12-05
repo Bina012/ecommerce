@@ -15,7 +15,6 @@
                         <div class="card-body">
                             {!! Form::open(['route' => $base_route . 'store', 'method' => 'post']) !!}
                             @include($folder . 'includes.main_form',['button' => 'Save'])
-
                             {!! Form::close() !!}
 
                         </div>

@@ -37,7 +37,7 @@
     {!! Form::textarea('meta_title', null,['class' => 'form-control','rows' => 2]); !!}
 </div>
 <div class="form-group">
-    {!! Form::label('meta_keyword', 'Meta Keyword'); !!}
+    {!! Form::label('meta_Keyword', 'Meta Keyword'); !!}
     {!! Form::textarea('meta_Keyword', null,['class' => 'form-control','rows' => 2]); !!}
 </div>
 <div class="form-group">

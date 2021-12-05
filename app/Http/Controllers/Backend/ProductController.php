@@ -103,8 +103,8 @@ class ProductController extends BackendBaseController
                    $images[$i]->move('images/backend/product/',$iname);
                     $image_dimesions = [
                         [
-                            'width' => 200,
-                            'height' => 200
+                            'width' => 255,
+                            'height' => 271
                         ],
                         [
                             'width' => 500,

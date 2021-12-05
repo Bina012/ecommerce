@@ -18,6 +18,7 @@
                                     <th>Name</th>
                                     <th>Slug</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
 

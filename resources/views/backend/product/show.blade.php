@@ -138,18 +138,28 @@
                                 </tr>
                                 @endforeach
                             </table>
+                            <h4>Image</h4>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Title</th>
+                                </tr>
+
+                                    @foreach($data['record']->productImage as $image)
+                                    <tr>
+                                        <td><img src="{{asset($file_path . $image->image_name)}}" alt="" width="100"></td>
+                                        <td>{{$image->image_title}}</td>
+                                    </tr>
+                                    @endforeach
+
+                            </table>
                         </div>
                     </div><!-- /.card -->
                 </div>
             </div>
 
         </div>
-        <table>
-            <tr>
-                <th>Image</th>
 
-            </tr>
-        </table>
 
     </div>
     <!-- /.content -->

@@ -14,8 +14,6 @@
                         <div class="card-body">
                             {!! Form::model($data['record'], ['route' => [$base_route . 'update', $data['record']->id],'method' => 'put']) !!}
                             @include($folder . 'includes.main_form',['button' => 'Update'])
-
-
                             {!! Form::close() !!}
 
                         </div>

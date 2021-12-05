@@ -25,7 +25,7 @@ class CheckPermision
         if ($permission){
             $permission_grant = $role->permissions()->where('permission_id',$permission->id)->first();
            if (!$permission_grant){
-//               abort(403);
+               //abort(403);
            }
         } else {
           // abort(403);
