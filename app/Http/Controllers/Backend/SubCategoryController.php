@@ -42,7 +42,6 @@ class SubCategoryController extends BackendBaseController
     {
         $data['categories'] = Category::pluck('name','id');
         return view($this->__loadDataToView($this->folder . 'create'),compact('data'));
-
     }
 
     /**

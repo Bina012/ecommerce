@@ -14,6 +14,7 @@
     <meta name="keywords" content="">
     <!-- meta character set -->
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Site Title -->
     <title>Karma Shop</title>
     <!--
@@ -24,12 +25,14 @@
     <link rel="stylesheet" href="{{asset('assets/frontend/css/themify-icons.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/owl.carousel.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/nice-select.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/nouislider.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/ion.rangeSlider.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/frontend/css/ion.rangeSlider.skinFlat.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/nice-select.css')}}">
+
     <link rel="stylesheet" href="{{asset('assets/frontend/css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/main.css')}}">
+    @yield('css')
 </head>
 
 <body>
@@ -125,16 +128,18 @@
         crossorigin="anonymous"></script>
 <script src="{{asset('assets/frontend/js/vendor/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/frontend/js/jquery.ajaxchimp.min.js')}}"></script>
-<script src="{{asset('assets/frontend/js/jquery.nice-select.min.js')}}"></script>
 <script src="{{asset('assets/frontend/js/jquery.sticky.js')}}"></script>
 <script src="{{asset('assets/frontend/js/nouislider.min.js')}}"></script>
-<script src="{{asset('assets/frontend/js/countdown.js')}}"></script>
+{{--<script src="{{asset('assets/frontend/js/countdown.js')}}"></script>--}}
 <script src="{{asset('assets/frontend/js/jquery.magnific-popup.min.js')}}"></script>
 <script src="{{asset('assets/frontend/js/owl.carousel.min.js')}}"></script>
+<script src="{{asset('assets/frontend/js/jquery.nice-select.min.js')}}"></script>
+
 <!--gmaps Js-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 <script src="{{asset('assets/frontend/js/gmaps.min.js')}}"></script>
 <script src="{{asset('assets/frontend/js/main.js')}}"></script>
+@yield('js')
 </body>
 
 </html>

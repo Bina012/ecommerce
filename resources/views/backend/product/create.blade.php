@@ -64,7 +64,7 @@
     <script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        $("#name").keyup(function() {
+        $("#title").keyup(function() {
             var Text = $(this).val();
             Text = Text.toLowerCase();
             Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');

@@ -43,6 +43,11 @@
     {!!Form::radio('flash_product', 0, false);!!}NO
 </div>
 <div class="form-group">
+    {!! Form::label('status', 'Status'); !!}
+    {!! Form::radio('status', 1); !!} Active
+    {!! Form::radio('status', 0,true); !!} Deactive
+</div>
+<div class="form-group">
     {!! Form::label('short_description', 'Short Description'); !!}
     {!! Form::textarea('short_description', null,['class' => 'form-control','rows' => 2]); !!}
 </div>

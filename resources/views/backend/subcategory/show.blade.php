@@ -16,46 +16,20 @@
                                     <td>{{$data['record']->name}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Slug</th>
-                                    <td>{{$data['record']->slug}}</td>
+                                    <th>Email</th>
+                                    <td>{{$data['record']->email}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Rank</th>
-                                    <td>{{$data['record']->rank}}</td>
+                                    <th>Phone</th>
+                                    <td>{{$data['record']->phone}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Short Description</th>
-                                    <td>{{$data['record']->short_description}}</td>
+                                    <th>Review</th>
+                                    <td>{{$data['record']->review}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Description</th>
-                                    <td>{{$data['record']->description}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Image</th>
-                                    <td><img src="{{asset('admin/category/'. $data['record']->image)}}" alt=""></td>
-                                </tr>
-                                <tr>
-                                    <th>Meta Description</th>
-                                    <td>{{$data['record']->meta_description}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Meta title</th>
-                                    <td>{{$data['record']->meta_title}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Meta keyword</th>
-                                    <td>{{$data['record']->meta_Keyword}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Status</th>
-                                    <td>
-                                        @if($data['record']->status==1)
-                                            <span class="text-success">Active</span>
-                                        @else
-                                            <span class="text-danger">Deactive</span>
-                                        @endif
-                                    </td>
+                                    <th>Rate</th>
+                                    <td>{{$data['record']->rate}}</td>
                                 </tr>
                                 <tr>
                                     <th>Created at</th>
@@ -66,16 +40,8 @@
                                     <td>{{$data['record']->updated_at}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Created by</th>
-                                    <td>{{\App\Models\User::find($data['record']->created_by)->name}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Updated by</th>
-                                    <td>
-                                        @if($data['record']->updated_by)
-                                        {{\App\Models\User::find($data['record']->updated_by)->name}}
-                                        @endif
-                                    </td>
+                                    <th>Deleted at</th>
+                                    <td>{{$data['record']->deleted_at}}</td>
                                 </tr>
                             </table>
                         </div>

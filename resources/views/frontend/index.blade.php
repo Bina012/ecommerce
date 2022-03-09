@@ -194,7 +194,7 @@
                         <div class="col-lg-3 col-md-6">
                         <div class="single-product">
                             @if($image)
-                            <img class="img-fluid" src="{{asset('images/backend/product/200_200_' . $image->image_name)}}" alt="{{$image->image_title}}" height="271">
+                            <img class="img-fluid" src="{{asset('images/backend/product/255_271_' . $image->image_name)}}" alt="{{$image->image_title}}" height="271">
                             @else
                                 <img class="img-fluid" src="{{asset('assets/frontend/img/product/p1.jpg')}}" alt="">
                             @endif
@@ -218,7 +218,7 @@
                                         <span class="lnr lnr-sync"></span>
                                         <p class="hover-text">compare</p>
                                     </a>
-                                    <a href="{{route('frontend.product',$latest->id)}}" class="social-info">
+                                    <a href="{{route('frontend.product',$latest->slug)}}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                         <p class="hover-text">view more</p>
                                     </a>

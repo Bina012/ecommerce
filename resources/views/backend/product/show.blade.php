@@ -72,7 +72,6 @@
                                     <th>Specification</th>
                                     <td>{{$data['record']->specification}}</td>
                                 </tr>
-
                                 <tr>
                                     <th>Created at</th>
                                     <td>{{$data['record']->created_at}}</td>
