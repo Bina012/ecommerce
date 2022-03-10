@@ -21,6 +21,7 @@
         <div class="container">
             <div class="cart_inner">
                 <div class="table-responsive">
+                    @include('backend.common.flash_message')
                     <table class="table">
                         <thead>
                         <tr>
@@ -78,6 +79,7 @@
                         </tr>
                         @endforeach
 
+                        @if(count($data['carts']) > 0)
                         <tr class="bottom_button">
                             <td>
 
@@ -166,6 +168,12 @@
                                 </div>
                             </td>
                         </tr>
+                        @else
+                            <tr>
+                                <td colspan="4"><span class="text text-danger">Cart is Empty</span></td>
+                            </tr>
+                        @endif
+
                         </tbody>
                     </table>
                 </div>

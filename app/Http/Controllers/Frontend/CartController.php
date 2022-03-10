@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Checkout;
+use App\Models\CheckoutDetails;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Subcategory;
@@ -58,7 +60,21 @@ class CartController extends FrontBaseController
     }
 
     function  makeOrder(Request  $request){
-
-        dd($request->all());
+        $request->request->add(['checkout_code' => uniqid()]);
+        $data = Checkout::create($request->all());
+        if ($data){
+            $details['checkout_id'] = $data->id;
+            foreach (Cart::content() as $rowId => $item){
+                $details['product_id'] = $item->id;
+                $details['price'] = $item->price;
+                $details['quantity'] = $item->qty;
+                CheckoutDetails::create($details);
+                Cart::remove($rowId);
+            }
+            $request->session()->flash('success','Checkout successfully: Your checkout code is : ' . $data->checkout_code);
+        } else {
+            $request->session()->flash('error' , 'Checkout Failed');
+        }
+        return redirect()->route('cart.index');
     }
 }
