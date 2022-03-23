@@ -52,7 +52,6 @@ class ProductController extends BackendBaseController
         $data['tags'] = Tag::pluck('name','id');
         $data['attributes'] = Attribute::pluck('name','id');
         $data['units'] = Unit::pluck('name','id');
-
         return view($this->__loadDataToView($this->folder . 'create'),compact('data'));
 
     }
@@ -189,9 +188,6 @@ class ProductController extends BackendBaseController
             $request->request->add(['image' => $file_name]);
             unlink(public_path() . DIRECTORY_SEPARATOR . $this->file_path .$data['record']->image);
         }
-
-
-
         if ($data['record']->update($request->all())){
             $request->session()->flash('success','Category update success');
         }else{

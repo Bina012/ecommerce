@@ -12,7 +12,6 @@
     {!! Form::label('slug', 'Slug'); !!}
     {!! Form::text('slug', null,['class' => 'form-control']); !!}
     @include('backend.common.validation_field',['field' => 'slug'])
-
 </div>
 <div class="form-group">
     {!! Form::label('rank', 'Rank'); !!}

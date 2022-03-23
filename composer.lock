@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e88c9b5f1ee5bd14d8b1c722324172ff",
+    "content-hash": "35593b0f6785e0bbedad1e749a3ecc5d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -708,16 +708,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.4.0",
+            "version": "7.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "868b3571a039f0ebc11ac8f344f4080babe2cb94"
+                "reference": "ac1ec1cd9b5624694c3a40be801d94137afb12b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/868b3571a039f0ebc11ac8f344f4080babe2cb94",
-                "reference": "868b3571a039f0ebc11ac8f344f4080babe2cb94",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ac1ec1cd9b5624694c3a40be801d94137afb12b4",
+                "reference": "ac1ec1cd9b5624694c3a40be801d94137afb12b4",
                 "shasum": ""
             },
             "require": {
@@ -726,7 +726,7 @@
                 "guzzlehttp/psr7": "^1.8.3 || ^2.1",
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-client": "^1.0",
-                "symfony/deprecation-contracts": "^2.2"
+                "symfony/deprecation-contracts": "^2.2 || ^3.0"
             },
             "provide": {
                 "psr/http-client-implementation": "1.0"
@@ -750,12 +750,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -812,7 +812,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.4.0"
+                "source": "https://github.com/guzzle/guzzle/tree/7.4.2"
             },
             "funding": [
                 {
@@ -828,7 +828,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-10-18T09:52:00+00:00"
+            "time": "2022-03-20T14:16:28+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1286,28 +1286,28 @@
         },
         {
             "name": "laravel/sanctum",
-            "version": "v2.12.0",
+            "version": "v2.14.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sanctum.git",
-                "reference": "0b8664bb065f080e93c209f1ae1b78b5a9e13f15"
+                "reference": "dc5d749ba9bfcfd68d8f5c272238f88bea223e66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sanctum/zipball/0b8664bb065f080e93c209f1ae1b78b5a9e13f15",
-                "reference": "0b8664bb065f080e93c209f1ae1b78b5a9e13f15",
+                "url": "https://api.github.com/repos/laravel/sanctum/zipball/dc5d749ba9bfcfd68d8f5c272238f88bea223e66",
+                "reference": "dc5d749ba9bfcfd68d8f5c272238f88bea223e66",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "illuminate/contracts": "^6.9|^7.0|^8.0",
-                "illuminate/database": "^6.9|^7.0|^8.0",
-                "illuminate/support": "^6.9|^7.0|^8.0",
+                "illuminate/contracts": "^6.9|^7.0|^8.0|^9.0",
+                "illuminate/database": "^6.9|^7.0|^8.0|^9.0",
+                "illuminate/support": "^6.9|^7.0|^8.0|^9.0",
                 "php": "^7.2|^8.0"
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
-                "orchestra/testbench": "^4.0|^5.0|^6.0",
+                "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0",
                 "phpunit/phpunit": "^8.0|^9.3"
             },
             "type": "library",
@@ -1346,7 +1346,7 @@
                 "issues": "https://github.com/laravel/sanctum/issues",
                 "source": "https://github.com/laravel/sanctum"
             },
-            "time": "2021-10-19T15:33:22+00:00"
+            "time": "2022-02-16T14:40:23+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -4949,6 +4949,94 @@
                 }
             ],
             "time": "2021-08-04T21:20:46+00:00"
+        },
+        {
+            "name": "symfony/psr-http-message-bridge",
+            "version": "v2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/psr-http-message-bridge.git",
+                "reference": "22b37c8a3f6b5d94e9cdbd88e1270d96e2f97b34"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/psr-http-message-bridge/zipball/22b37c8a3f6b5d94e9cdbd88e1270d96e2f97b34",
+                "reference": "22b37c8a3f6b5d94e9cdbd88e1270d96e2f97b34",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "psr/http-message": "^1.0",
+                "symfony/http-foundation": "^4.4 || ^5.0 || ^6.0"
+            },
+            "require-dev": {
+                "nyholm/psr7": "^1.1",
+                "psr/log": "^1.1 || ^2 || ^3",
+                "symfony/browser-kit": "^4.4 || ^5.0 || ^6.0",
+                "symfony/config": "^4.4 || ^5.0 || ^6.0",
+                "symfony/event-dispatcher": "^4.4 || ^5.0 || ^6.0",
+                "symfony/framework-bundle": "^4.4 || ^5.0 || ^6.0",
+                "symfony/http-kernel": "^4.4 || ^5.0 || ^6.0",
+                "symfony/phpunit-bridge": "^5.4@dev || ^6.0"
+            },
+            "suggest": {
+                "nyholm/psr7": "For a super lightweight PSR-7/17 implementation"
+            },
+            "type": "symfony-bridge",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "2.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bridge\\PsrHttpMessage\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "PSR HTTP message bridge",
+            "homepage": "http://symfony.com",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr-17",
+                "psr-7"
+            ],
+            "support": {
+                "issues": "https://github.com/symfony/psr-http-message-bridge/issues",
+                "source": "https://github.com/symfony/psr-http-message-bridge/tree/v2.1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-11-05T13:13:39+00:00"
         },
         {
             "name": "symfony/routing",

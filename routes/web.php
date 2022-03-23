@@ -25,7 +25,7 @@ Route::post('/cart/apply_coupon', [\App\Http\Controllers\Frontend\CartController
 Route::post('/cart/make_order', [\App\Http\Controllers\Frontend\CartController::class, 'makeOrder'])->name('frontend.cart.make_order');
 
 
-Auth::routes(['register' => false]);
+Auth::routes(['register' => true]);
 Route::middleware(['auth','permission'])->group(function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
