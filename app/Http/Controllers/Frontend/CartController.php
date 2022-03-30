@@ -60,6 +60,7 @@ class CartController extends FrontBaseController
     }
 
     function  makeOrder(Request  $request){
+        $payment_type = $request->payment_type;
         $request->request->add(['checkout_code' => uniqid()]);
         $data = Checkout::create($request->all());
         if ($data){
@@ -75,6 +76,11 @@ class CartController extends FrontBaseController
         } else {
             $request->session()->flash('error' , 'Checkout Failed');
         }
-        return redirect()->route('cart.index');
+
+        if ( $payment_type == 'paypal'){
+            return redirect()->to('create-transaction/' . $data->id);
+        } else {
+            return redirect()->route('cart.index');
+        }
     }
 }

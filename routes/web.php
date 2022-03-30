@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Frontend\PaypalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,18 +12,52 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('/category/filter_product', [\App\Http\Controllers\Frontend\FrontendController::class, 'filterProduct'])->name('frontend.category.filter_product');
-Route::get('/', [\App\Http\Controllers\Frontend\FrontendController::class, 'index'])->name('frontend.index');
-Route::get('/category/{slug}', [\App\Http\Controllers\Frontend\FrontendController::class, 'category'])->name('frontend.category');
-Route::get('/subcategory/{slug}', [\App\Http\Controllers\Frontend\FrontendController::class, 'subcategory'])->name('frontend.subcategory');
-Route::get('/product/{slug}', [\App\Http\Controllers\Frontend\FrontendController::class, 'product'])->name('frontend.product');
+
+Route::get('create-transaction/{checkout_id?}', [PayPalController::class, 'createTransaction'])->name('createTransaction');
+Route::get('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
+Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
+
+
+Route::prefix('/customer')->name('customer.')->namespace('Customer')->group(function(){
+
+    /**
+     * Admin Auth Route(s)
+     */
+    Route::namespace('Auth')->group(function(){
+
+        //Login Routes
+        Route::get('/login', [\App\Http\Controllers\Customer\Auth\LoginController::class, 'showLoginForm'])->name('login');
+        Route::post('/login',[\App\Http\Controllers\Customer\Auth\LoginController::class, 'login'])->name('dologin');
+        Route::post('/logout',[\App\Http\Controllers\Customer\Auth\LoginController::class, 'logout'])->name('logout');
+
+        //Register Routes
+        // Route::get('/register','RegisterController@showRegistrationForm')->name('register');
+        // Route::post('/register','RegisterController@register');
+
+    });
+
+    Route::get('/dashboard',[\App\Http\Controllers\Customer\HomeController::class,'index'])->name('home');
+
+    //Put all of your admin routes here...
+
+});
+
+
+Route::name('frontend.')->group(function() {
+
+    Route::post('/category/filter_product', [\App\Http\Controllers\Frontend\FrontendController::class, 'filterProduct'])->name('category.filter_product');
+    Route::get('/', [\App\Http\Controllers\Frontend\FrontendController::class, 'index'])->name('index');
+    Route::get('/category/{slug}', [\App\Http\Controllers\Frontend\FrontendController::class, 'category'])->name('category');
+    Route::get('/subcategory/{slug}', [\App\Http\Controllers\Frontend\FrontendController::class, 'subcategory'])->name('subcategory');
+    Route::get('/product/{slug}', [\App\Http\Controllers\Frontend\FrontendController::class, 'product'])->name('product');
+    Route::post('/cart/make_order', [\App\Http\Controllers\Frontend\CartController::class, 'makeOrder'])->name('cart.make_order');
+});
 Route::post('/cart/add', [\App\Http\Controllers\Frontend\CartController::class, 'add'])->name('frontend.cart.add');
 Route::get('/cart', [\App\Http\Controllers\Frontend\CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/update', [\App\Http\Controllers\Frontend\CartController::class, 'update'])->name('cart.update');
 Route::get('/cart/checkout', [\App\Http\Controllers\Frontend\CartController::class, 'checkout'])->name('cart.checkout');
 Route::post('/cart/apply_coupon', [\App\Http\Controllers\Frontend\CartController::class, 'applyCoupon'])->name('cart.apply_coupon');
-Route::post('/cart/make_order', [\App\Http\Controllers\Frontend\CartController::class, 'makeOrder'])->name('frontend.cart.make_order');
-
 
 Auth::routes(['register' => true]);
 Route::middleware(['auth','permission'])->group(function() {
