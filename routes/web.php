@@ -66,7 +66,7 @@ Route::middleware(['auth','permission'])->group(function() {
 Route::post('/category/getsubcategory', [\App\Http\Controllers\Backend\CategoryController::class, 'getSubcategory'])->name('category.getsubcategory');
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::prefix('backend')->name('backend.')->middleware(['auth','permission'])->group(function(){
+Route::prefix('backend')->name('backend.')->middleware(['auth'])->group(function(){
     Route::get('/role/assign_form/{id}', [\App\Http\Controllers\Backend\RoleController::class, 'assignForm'])->name('role.assign_form');
     Route::post('/role/assign_permission', [\App\Http\Controllers\Backend\RoleController::class, 'assignPermission'])->name('role.assign_permission');
     Route::resource('/category', \App\Http\Controllers\Backend\CategoryController::class );
