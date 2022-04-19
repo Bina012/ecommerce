@@ -216,117 +216,95 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="rating_list">
-                                        <h3>Based on 3 Reviews</h3>
-                                        <ul class="list">
-                                            <li><a href="#">5 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                        class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-                                            <li><a href="#">4 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                        class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-                                            <li><a href="#">3 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                        class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-                                            <li><a href="#">2 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                        class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-                                            <li><a href="#">1 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                        class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-                                        </ul>
+
                                     </div>
                                 </div>
                             </div>
                             <div class="review_list">
+                                @foreach($data['ratings'] as $rate)
                                 <div class="review_item">
                                     <div class="media">
                                         <div class="d-flex">
                                             <img src="img/product/review-1.png" alt="">
                                         </div>
                                         <div class="media-body">
-                                            <h4>Blake Ruiz</h4>
+                                            <h4>{{\App\Models\Customer::find($rate->customer_id)->name}}</h4>
+                                          @if($rate->rate == 1)
                                             <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                                @endif
+                                            @if($rate->rate == 2)
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            @endif
+                                            @if($rate->rate == 3)
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            @endif
+                                            @if($rate->rate == 4)
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            @endif
+                                            @if($rate->rate == 5)
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            @endif
                                         </div>
                                     </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                        commodo</p>
+                                    <p>{{$rate->review}}</p>
                                 </div>
-                                <div class="review_item">
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="img/product/review-2.png" alt="">
-                                        </div>
-                                        <div class="media-body">
-                                            <h4>Blake Ruiz</h4>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                        commodo</p>
-                                </div>
-                                <div class="review_item">
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="img/product/review-3.png" alt="">
-                                        </div>
-                                        <div class="media-body">
-                                            <h4>Blake Ruiz</h4>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                        commodo</p>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="review_box">
-                                <h4>Add a Review</h4>
+
+                              @if($data['ratedata'] == 1)
+                                    <p> Your have alrady done rating </p>
+                                  @else
+                                @if(\Illuminate\Support\Facades\Auth::guard('customer')->user())
+                                        <h4>Add a Review</h4>
                                 <p>Your Rating:</p>
-                                <ul class="list">
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                                <p>Outstanding</p>
-                                <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Full name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Full name'">
-                                        </div>
+{{--                                <ul class="list">--}}
+{{--                                    <li><a href="#"><i class="fa fa-star"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-star"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-star"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-star"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-star"></i></a></li>--}}
+{{--                                </ul>--}}
+                                <div id='jqxRating'>
+                                </div>
+                                <div style='margin-top: 10px;'>
+                                    <div style='float: left;'>
+                                        Rating:</div>
+                                    <div style='float: left;' id='rate'>
                                     </div>
+                                </div>
+                                <br>
+                                <form class="row contact_form" action="{{route('frontend.product.rating')}}" method="post" id="contactForm" novalidate="novalidate">
+                                    @csrf
                                     <div class="col-md-12">
+                                        <input type="hidden" name="product_id" value="{{$data['details']->id}}">
+                                        <input type="hidden" id="rating_field" name="rate">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="number" name="number" placeholder="Phone Number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone Number'">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="Review" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Review'"></textarea></textarea>
+                                            <textarea class="form-control" name="review" id="message" rows="1" placeholder="Review" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Review'"></textarea></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-right">
                                         <button type="submit" value="submit" class="primary-btn">Submit Now</button>
                                     </div>
                                 </form>
+                                @else
+                                    <p> Please login to provide rating</p>
+                                @endif
                             </div>
+
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -471,4 +449,27 @@
         </div>
     </section>
     <!-- End related-product Area -->
+@endsection
+
+@section('css')
+    <link rel="stylesheet" href="{{asset('assets/frontend/rate/jqwidgets/styles/jqx.base.css')}}" type="text/css" />
+    @endsection
+
+
+@section('js')
+    <script type="text/javascript" src="{{asset('assets/frontend/rate/scripts/jquery-1.11.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/frontend/rate/jqwidgets/jqxcore.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/frontend/rate/jqwidgets/jqxrating.js')}}"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Create jqxRating.
+            $("#jqxRating").jqxRating({ width: 350, height: 35});
+            // bind to jqxRating 'change' event.
+            $("#jqxRating").bind('change', function (event) {
+                $("#rate").html('<span>' + event.value + '</span');
+                $('#rating_field').val(event.value);
+            });
+        });
+    </script>
 @endsection

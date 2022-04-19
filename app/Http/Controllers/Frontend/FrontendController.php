@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Rating;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends FrontBaseController
 {
@@ -23,7 +25,11 @@ class FrontendController extends FrontBaseController
     }
 
     public  function  product($slug){
+
         $data['details'] = Product::where('slug',$slug)->first();
+       $data['ratedata'] =  Rating::where('customer_id' ,Auth::guard('customer')->user()->id)->where('product_id',$data['details']->id)->count();
+        $data['ratings'] =  Rating::where('product_id',$data['details']->id)->get();
+
         return view($this->__loadDataToView('frontend.product'),compact('data'));
     }
 
@@ -77,6 +83,14 @@ class FrontendController extends FrontBaseController
 
       }
         return $html;
+    }
+
+    function rating(Request  $request){
+        $request->request->add(['customer_id' => 1]);
+        Rating::create($request->all());
+        $product = Product::find($request->product_id);
+        return redirect()->route('frontend.product',$product->slug);
+
     }
 
 }

@@ -23,6 +23,7 @@ class CartController extends FrontBaseController
 
     function  index(){
         $data['carts'] = Cart::content();
+        //dd($data['carts']);
         return view($this->__loadDataToView('frontend.cart.index'),compact('data'));
     }
 

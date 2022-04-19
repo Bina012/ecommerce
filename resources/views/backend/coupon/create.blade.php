@@ -30,11 +30,11 @@
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('date_from', 'Date From'); !!}
-                                    {!! Form::number('date_from', null,['class' => 'form-control']); !!}
+                                    {!! Form::date('date_from', null,['class' => 'form-control']); !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('date_to', 'Date To'); !!}
-                                    {!! Form::number('date_to', null,['class' => 'form-control']); !!}
+                                    {!! Form::date('date_to', null,['class' => 'form-control']); !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('status', 'Status'); !!}

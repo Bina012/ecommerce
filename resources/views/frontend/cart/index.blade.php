@@ -45,7 +45,9 @@
                             <td>
                                 <div class="media">
                                     <div class="d-flex">
-                                        <img src="{{asset('images/backend/product/255_271_' . $image->image_name)}}" alt="">
+                                        @if($image)
+                                            <img src="{{asset('images/backend/product/255_271_' . $image->image_name)}}" alt="">
+                                        @endif
                                     </div>
                                     <div class="media-body">
                                         <p>{{$product->title}}</p>
@@ -196,6 +198,7 @@
                 url: "{{route('cart.apply_coupon')}}",
                 data:{'code':coupon_code},
                 success:function (resp){
+                    console.log(resp);
                     $('#discount_amount').html(resp.discount);
                     $('#final_amount').html(resp.final);
                 }

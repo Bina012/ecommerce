@@ -32,8 +32,8 @@ Route::prefix('/customer')->name('customer.')->namespace('Customer')->group(func
         Route::post('/logout',[\App\Http\Controllers\Customer\Auth\LoginController::class, 'logout'])->name('logout');
 
         //Register Routes
-        // Route::get('/register','RegisterController@showRegistrationForm')->name('register');
-        // Route::post('/register','RegisterController@register');
+         Route::get('/register',[\App\Http\Controllers\Customer\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+         Route::post('/register',[\App\Http\Controllers\Customer\Auth\RegisterController::class, 'doregister'])->name('doregister');
 
     });
 
@@ -45,7 +45,7 @@ Route::prefix('/customer')->name('customer.')->namespace('Customer')->group(func
 
 
 Route::name('frontend.')->group(function() {
-
+    Route::post('/product/rating', [\App\Http\Controllers\Frontend\FrontendController::class, 'rating'])->name('product.rating');
     Route::post('/category/filter_product', [\App\Http\Controllers\Frontend\FrontendController::class, 'filterProduct'])->name('category.filter_product');
     Route::get('/', [\App\Http\Controllers\Frontend\FrontendController::class, 'index'])->name('index');
     Route::get('/category/{slug}', [\App\Http\Controllers\Frontend\FrontendController::class, 'category'])->name('category');

@@ -1,7 +1,6 @@
 @extends('layouts.backend')
-@section('title',$panel . ' Details')
+@section('title',$panel . 'Details')
 @section('main-content')
-    <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -16,20 +15,36 @@
                                     <td>{{$data['record']->name}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Email</th>
-                                    <td>{{$data['record']->email}}</td>
+                                    <th>Status</th>
+                                    <td>{{$data['record']->status}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Phone</th>
-                                    <td>{{$data['record']->phone}}</td>
+                                    <th>Rank</th>
+                                    <td>{{$data['record']->rank}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Review</th>
-                                    <td>{{$data['record']->review}}</td>
+                                    <th>Short Description</th>
+                                    <td>{{$data['record']->short_description}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Rate</th>
-                                    <td>{{$data['record']->rate}}</td>
+                                    <th>Description</th>
+                                    <td>{{$data['record']->description}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Image</th>
+                                    <td>{{$data['record']->image_file}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Meta Keyword</th>
+                                    <td>{{$data['record']->meta_keyword}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Meta Description</th>
+                                    <td>{{$data['record']->meta_description}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Meta Title</th>
+                                    <td>{{$data['record']->meta_title}}</td>
                                 </tr>
                                 <tr>
                                     <th>Created at</th>
@@ -43,14 +58,19 @@
                                     <th>Deleted at</th>
                                     <td>{{$data['record']->deleted_at}}</td>
                                 </tr>
+                                <tr>
+                                    <th>Created by</th>
+                                    <td>{{$data['record']->created_by}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Updated by</th>
+                                    <td>{{$data['record']->updated_by}}</td>
+                                </tr>
                             </table>
                         </div>
-                    </div><!-- /.card -->
+                    </div>
                 </div>
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
     </div>
-    <!-- /.content -->
 @endsection
-

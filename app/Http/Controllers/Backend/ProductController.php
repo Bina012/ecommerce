@@ -15,6 +15,7 @@ use App\Models\Tag;
 use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 use Intervention\Image\Facades\Image;
 
 class ProductController extends BackendBaseController
@@ -205,14 +206,13 @@ class ProductController extends BackendBaseController
      */
     public function destroy(Request $request,$id)
     {
+        Schema::disableForeignKeyConstraints();
         $data['record'] = Product::find($id);
-//        $img = $data['record']->image;
+        $data['record']->tags()->detach();
+        $data['record']->productAttributes()->delete();
+        $data['record']->productImage()->delete();
+        Schema::enableForeignKeyConstraints();
         if ($data['record']->delete()){
-//            if ($img){
-//                if (file_exists(public_path().'/admin/category/'.$img)){
-//                    unlink(public_path().'/admin/category/'.$img);
-//                }
-//            }
             $request->session()->flash('success','Product delete success');
             return redirect()->route($this->base_route . 'index');
         }else{
