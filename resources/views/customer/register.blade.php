@@ -29,7 +29,41 @@
                     <form method="POST" action="{{ route('customer.doregister') }}">
                         @csrf
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="Email" name="email">
+                            <input type="text" class="form-control" placeholder="Name" name="name" required>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        @error('name')
+                        {{$message}}
+                        @enderror
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Address" name="address" required>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        @error('address')
+                        {{$message}}
+                        @enderror
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Country" name="country" required>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        @error('country')
+                        {{$message}}
+                        @enderror
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Email" name="email" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -39,8 +73,9 @@
                         @error('email')
                         {{$message}}
                         @enderror
+
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Password" name="password">
+                            <input type="password" class="form-control" placeholder="Password" name="password" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -50,6 +85,18 @@
                         @error('password')
                         {{$message}}
                         @enderror
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" placeholder="Contact" name="contact" required>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        @error('contact')
+                        {{$message}}
+                        @enderror
+
                         <div class="row">
                             <div class="col-8">
                                 <div class="icheck-primary">
