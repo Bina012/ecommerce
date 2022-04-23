@@ -23,6 +23,7 @@
 
             <div class="card">
                 <div class="card-body login-card-body">
+
                     <p class="login-box-msg">{{__('login.info')}}</p>
 
                     <form method="POST" action="{{ route('customer.dologin') }}">
@@ -57,7 +58,11 @@
                                         {{__('login.remember_me')}}
                                     </label>
                                 </div>
+                                <a href="{{route('customer.doregister')}}">Register</a>
                             </div>
+
+
+
                             <!-- /.col -->
                             <div class="col-4">
                                 <button type="submit" class="btn btn-primary btn-block">{{__('login.sign_in')}}</button>

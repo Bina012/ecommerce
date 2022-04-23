@@ -27,7 +27,7 @@ class FrontendController extends FrontBaseController
     public  function  product($slug){
 
         $data['details'] = Product::where('slug',$slug)->first();
-       $data['ratedata'] =  Rating::where('customer_id' ,Auth::guard('customer')->user()->id)->where('product_id',$data['details']->id)->count();
+        $data['ratedata'] =  Rating::where('customer_id' ,Auth::guard('customer')->user()->id)->where('product_id',$data['details']->id)->count();
         $data['ratings'] =  Rating::where('product_id',$data['details']->id)->get();
 
         return view($this->__loadDataToView('frontend.product'),compact('data'));

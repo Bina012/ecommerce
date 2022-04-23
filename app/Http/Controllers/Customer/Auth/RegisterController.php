@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Customer\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Customer;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -77,4 +80,24 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    public function doregister(Request $request)
+    {
+        $data = [
+              "name" => $request->name,
+              "address" => $request->address,
+              "country" => $request->country,
+              "email" => $request->email,
+              "password" => Hash::make($request->password),
+              "contact" => $request->contact,
+        ];
+        $register = Customer::create($data);
+        return redirect()->route('customer.home',compact('register'));
+
+
+
+    }
+
+
+
 }
