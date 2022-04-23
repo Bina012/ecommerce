@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Rating;
 use App\Models\Subcategory;
@@ -25,10 +26,20 @@ class FrontendController extends FrontBaseController
     }
 
     public  function  product($slug){
-
+        $data = [];
         $data['details'] = Product::where('slug',$slug)->first();
-        $data['ratedata'] =  Rating::where('customer_id' ,Auth::guard('customer')->user()->id)->where('product_id',$data['details']->id)->count();
-        $data['ratings'] =  Rating::where('product_id',$data['details']->id)->get();
+
+        if (!empty(Auth::guard('customer')->user()->id)){
+            $data['customers'] = Customer::all();
+            $dataSet = [];
+            foreach($data['customers'] as $customer){
+                $dataSet[$customer->id] = Rating::where('customer_id',$customer->id)->pluck('rate','product_id')->toArray();
+            }
+            $data['recommended_products'] = $this->getRecommendations($dataSet, Auth::guard('customer')->user()->id);
+            $data['ratedata'] =  Rating::where('customer_id' ,Auth::guard('customer')->user()->id)->where('product_id',$data['details']->id)->count();
+            $data['ratings'] =  Rating::where('product_id',$data['details']->id)->get();
+
+        }
 
         return view($this->__loadDataToView('frontend.product'),compact('data'));
     }
@@ -86,10 +97,120 @@ class FrontendController extends FrontBaseController
     }
 
     function rating(Request  $request){
-        $request->request->add(['customer_id' => 1]);
+        $request->request->add(['customer_id' => Auth::guard('customer')->user()->id]);
         Rating::create($request->all());
         $product = Product::find($request->product_id);
         return redirect()->route('frontend.product',$product->slug);
+
+    }
+
+    //Euclidean distance
+    public function similarityDistance($preferences, $person1, $person2)
+    {
+        $similar = array();
+        $sum = 0;
+
+        foreach($preferences[$person1] as $key=>$value)
+        {
+            if(array_key_exists($key, $preferences[$person2]))
+                $similar[$key] = 1;
+        }
+
+        if(count($similar) == 0)
+            return 0;
+
+        foreach($preferences[$person1] as $key=>$value)
+        {
+            if(array_key_exists($key, $preferences[$person2]))
+                $sum = $sum + pow($value - $preferences[$person2][$key], 2);
+        }
+
+        return  1/(1 + sqrt($sum));
+    }
+
+
+    public function matchItems($preferences, $person)
+    {
+        $score = array();
+
+        foreach($preferences as $otherPerson=>$values)
+        {
+            if($otherPerson !== $person)
+            {
+                $sim = $this->similarityDistance($preferences, $person, $otherPerson);
+
+                if($sim > 0)
+                    $score[$otherPerson] = $sim;
+            }
+        }
+
+        array_multisort($score, SORT_DESC);
+        return $score;
+
+    }
+
+
+    public function transformPreferences($preferences)
+    {
+        $result = array();
+
+        foreach($preferences as $otherPerson => $values)
+        {
+            foreach($values as $key => $value)
+            {
+                $result[$key][$otherPerson] = $value;
+            }
+        }
+
+        return $result;
+    }
+
+
+    public function getRecommendations($preferences, $person)
+    {
+
+        $total = array();
+        $simSums = array();
+        $ranks = array();
+        $sim = 0;
+
+        foreach($preferences as $otherPerson=>$values)
+        {
+
+            if($otherPerson != $person)
+            {
+                $sim = $this->similarityDistance($preferences, $person, $otherPerson);
+            }
+
+            if($sim > 0)
+            {
+                foreach($preferences[$otherPerson] as $key=>$value)
+                {
+                    if(!array_key_exists($key, $preferences[$person]))
+                    {
+
+                        if(!array_key_exists($key, $total)) {
+                            $total[$key] = 0;
+                        }
+                        $total[$key] += $preferences[$otherPerson][$key] * $sim;
+
+                        if(!array_key_exists($key, $simSums)) {
+                            $simSums[$key] = 0;
+                        }
+                        $simSums[$key] += $sim;
+                    }
+                }
+
+            }
+        }
+
+
+        foreach($total as $key=>$value)
+        {
+            $ranks[$key] = $value / $simSums[$key];
+        }
+//        array_multisort($ranks, SORT_DESC);
+        return $ranks;
 
     }
 
