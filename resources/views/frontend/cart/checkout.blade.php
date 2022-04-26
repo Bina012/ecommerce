@@ -60,7 +60,7 @@
                     <div class="col-lg-8">
                         <h3>Billing Details</h3>
                             <div class="col-md-6 form-group p_star">
-                                <input type="text" class="form-control" id="first" name="name" placeholder="Enter name">
+                                <input type="text" class="form-control" id="first" name="name" placeholder="Enter name" value="{{$data['customer']['name']}}">
 {{--                                <span class="placeholder" data-placeholder="First name"></span>--}}
                             </div>
 

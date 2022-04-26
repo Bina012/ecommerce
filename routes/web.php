@@ -30,6 +30,7 @@ Route::prefix('/customer')->name('customer.')->namespace('Customer')->group(func
         Route::get('/login', [\App\Http\Controllers\Customer\Auth\LoginController::class, 'showLoginForm'])->name('login');
         Route::post('/login',[\App\Http\Controllers\Customer\Auth\LoginController::class, 'login'])->name('dologin');
         Route::post('/logout',[\App\Http\Controllers\Customer\Auth\LoginController::class, 'logout'])->name('logout');
+//        Route::post('/logouts', [\App\Http\Controllers\Auth\LoginController::class,'logouts'])->name('logouts');
 
         //Register Routes
          Route::get('/register',[\App\Http\Controllers\Customer\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');

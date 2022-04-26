@@ -26,8 +26,11 @@ class FrontendController extends FrontBaseController
     }
 
     public  function  product($slug){
+
         $data = [];
         $data['details'] = Product::where('slug',$slug)->first();
+
+//        $data['products'] = $data['details']->products()->get();
 
         if (!empty(Auth::guard('customer')->user()->id)){
             $data['customers'] = Customer::all();
@@ -35,12 +38,12 @@ class FrontendController extends FrontBaseController
             foreach($data['customers'] as $customer){
                 $dataSet[$customer->id] = Rating::where('customer_id',$customer->id)->pluck('rate','product_id')->toArray();
             }
+//            $dataSet = array_filter($dataSet);
             $data['recommended_products'] = $this->getRecommendations($dataSet, Auth::guard('customer')->user()->id);
             $data['ratedata'] =  Rating::where('customer_id' ,Auth::guard('customer')->user()->id)->where('product_id',$data['details']->id)->count();
             $data['ratings'] =  Rating::where('product_id',$data['details']->id)->get();
-
         }
-
+//        dd($data);
         return view($this->__loadDataToView('frontend.product'),compact('data'));
     }
 
@@ -110,6 +113,7 @@ class FrontendController extends FrontBaseController
         $similar = array();
         $sum = 0;
 
+
         foreach($preferences[$person1] as $key=>$value)
         {
             if(array_key_exists($key, $preferences[$person2]))
@@ -128,52 +132,12 @@ class FrontendController extends FrontBaseController
         return  1/(1 + sqrt($sum));
     }
 
-
-    public function matchItems($preferences, $person)
-    {
-        $score = array();
-
-        foreach($preferences as $otherPerson=>$values)
-        {
-            if($otherPerson !== $person)
-            {
-                $sim = $this->similarityDistance($preferences, $person, $otherPerson);
-
-                if($sim > 0)
-                    $score[$otherPerson] = $sim;
-            }
-        }
-
-        array_multisort($score, SORT_DESC);
-        return $score;
-
-    }
-
-
-    public function transformPreferences($preferences)
-    {
-        $result = array();
-
-        foreach($preferences as $otherPerson => $values)
-        {
-            foreach($values as $key => $value)
-            {
-                $result[$key][$otherPerson] = $value;
-            }
-        }
-
-        return $result;
-    }
-
-
     public function getRecommendations($preferences, $person)
     {
-
         $total = array();
         $simSums = array();
         $ranks = array();
         $sim = 0;
-
         foreach($preferences as $otherPerson=>$values)
         {
 
@@ -182,8 +146,10 @@ class FrontendController extends FrontBaseController
                 $sim = $this->similarityDistance($preferences, $person, $otherPerson);
             }
 
+
             if($sim > 0)
             {
+
                 foreach($preferences[$otherPerson] as $key=>$value)
                 {
                     if(!array_key_exists($key, $preferences[$person]))

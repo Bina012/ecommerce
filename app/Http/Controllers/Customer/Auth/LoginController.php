@@ -104,6 +104,12 @@ class LoginController extends Controller
             ->route('customer.login')
             ->with('status','Customer has been logged out!');
     }
+//    public function logouts () {
+//        //logout user
+//        auth()->logout();
+//        // redirect to homepage
+//        return redirect('/dashboard');
+//    }
 
     /**
      * Validate the form data.

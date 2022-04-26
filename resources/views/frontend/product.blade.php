@@ -206,20 +206,7 @@
                 <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="row total_rate">
-                                <div class="col-6">
-                                    <div class="box_total">
-                                        <h5>Overall</h5>
-                                        <h4>4.0</h4>
-                                        <h6>(03 Reviews)</h6>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="rating_list">
 
-                                    </div>
-                                </div>
-                            </div>
                             <div class="review_list">
                                 @if(isset($data['ratings']))
                                 @forelse($data['ratings'] as $rate)
@@ -319,37 +306,43 @@
     <!--================End Product Description Area =================-->
 
     <!-- Start related-product Area -->
+    @if(isset($data['recommended_products']))
     <section class="related-product-area section_gap_bottom">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6 text-center">
                     <div class="section-title">
-                        <h1>Deals of the Week</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua.</p>
+                        <h1>Your Recommended Products</h1>
+
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-9">
                     <div class="row">
+
                         @foreach($data['recommended_products'] as $key => $value)
+
                        @php
                        $product = \App\Models\Product::find($key);
+                        $image = $product->productImage()->first();
                        @endphp
                         <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
                             <div class="single-related-product d-flex">
-                                <a href="#"><img src="img/r1.jpg" alt=""></a>
+                                <img class="img-fluid" src="{{asset('images/backend/product/255_271_' . $image->image_name)}}" alt="{{$image->image_title}}" height="271">
+                            </div>
                                 <div class="desc">
                                     <a href="#" class="title">{{$product->title}}</a>
                                     <div class="price">
-                                        <h6>$189.00</h6>
-                                        <h6 class="l-through">$210.00</h6>
+
+                                        <h6>Rs.{{$product->price-$product->discount}}</h6>
+                                        <h6 class="l-through">{{$product->price}}</h6>
                                     </div>
                                 </div>
-                            </div>
+
                         </div>
                         @endforeach
+
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -362,6 +355,7 @@
             </div>
         </div>
     </section>
+    @endif
     <!-- End related-product Area -->
 @endsection
 
@@ -371,7 +365,7 @@
 
 
 @section('js')
-    <script type="text/javascript" src="{{asset('assets/frontend/rate/scripts/jquery-1.11.1.min.js')}}"></script>
+{{--    <script type="text/javascript" src="{{asset('assets/frontend/rate/scripts/jquery-1.11.1.min.js')}}"></script>--}}
     <script type="text/javascript" src="{{asset('assets/frontend/rate/jqwidgets/jqxcore.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/frontend/rate/jqwidgets/jqxrating.js')}}"></script>
 

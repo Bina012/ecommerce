@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\Subcategory;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends FrontBaseController
 {
@@ -57,6 +58,10 @@ class CartController extends FrontBaseController
 
     function  checkout(){
         $data['carts'] = Cart::content();
+        $data['customer'] = [ "id" => '' , "name" => "", "address" => ""];
+        if (!empty(Auth::guard('customer')->user()->id)) {
+            $data['customer'] = Auth::guard('customer')->user()->toArray();
+        }
         return view($this->__loadDataToView('frontend.cart.checkout'),compact('data'));
     }
 
