@@ -28,14 +28,14 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         @if(isset(Auth::guard('customer')->user()->id))
-{{--                            <li class="nav-item"><a href="{{ url('/logout') }}" class="cart">Logout</a></li>--}}
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
+                            <li class="nav-item"><a href="{{ url('/logout') }}" class="cart">Logout</a></li>
+{{--                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">--}}
+{{--                                Logout--}}
+{{--                            </a>--}}
 
-                            <form id="logout-form" action="{{ route('logouts') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
+{{--                            <form id="logout-form" action="{{ route('logouts') }}" method="POST" style="display: none;">--}}
+{{--                                @csrf--}}
+{{--                            </form>--}}
 
                         @else
                             <li class="nav-item"><a href="{{route('customer.login')}}" class="cart"><span class="ti-user"></span></a></li>

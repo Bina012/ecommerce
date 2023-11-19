@@ -47,6 +47,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
+
         $category =  Category::where('status',1)->get();
         return view('customer.register',compact('category'));
     }
